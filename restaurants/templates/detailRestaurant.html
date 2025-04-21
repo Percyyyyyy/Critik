@@ -1,0 +1,92 @@
+{% extends 'maitre.html' %}
+{% load static %}
+
+{% block titre %}Critik - Détail du restaurant{% endblock %}
+
+{% block titrepage %}
+<h2>Restaurant choisi</h2>
+{% endblock %}
+
+{% block detailRestaurant %}
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h2>{{ leRestaurant.nomRestaurant }}</h2>
+                    {% if user.is_authenticated and user.is_superuser %}
+                    <div>
+                        <a href="{% url 'modifierRestaurant' leRestaurant.pk %}" class="btn-icon"><i class="bi bi-pencil"></i></a>
+                        <a href="{% url 'supprimerRestaurant' leRestaurant.pk %}" class="btn-icon"><i class="bi bi-trash"></i></a>
+                        
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <p><strong>Ville:</strong> {{ leRestaurant.villeRestaurant }}</p>
+                    <p><strong>Adresse:</strong> {{ leRestaurant.adresseRestaurant }}</p>
+                    <p><strong>Type:</strong> {{ leRestaurant.typeRestaurant.nomType }}</p>
+                    {% if user.is_authenticated and not commentaire_exist %}
+                    <a href="#" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#ajouterCommentaireModal">Ajouter un commentaire</a>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="modal fade" id="ajouterCommentaireModal" tabindex="-1"
+                aria-labelledby="ajouterCommentaireModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="ajouterCommentaireModalLabel">Ajouter un commentaire</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" action="{% url 'ajouterCommentaire' leRestaurant.pk %}">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label for="commentaire" class="form-label">Commentaire:</label>
+                                    <textarea name="commentaire" id="commentaire" class="form-control" rows="3"
+                                        required></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="note" class="form-label">Note:</label>
+                                    <input type="number" name="note" id="note" class="form-control" min="1" max="5"
+                                        required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Envoyer</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Liste des commentaires</h5>
+                    {% for commentaire in leRestaurant.commentaire_set.all %}
+                    <div class="mb-3 p-3 border border-2 {% if commentaire.userName == user %}
+                    custom-comment-highlight{% endif %}">
+                        <p>
+                            <strong>{{ commentaire.userName }}</strong>
+                            {% if commentaire.userName == user %}
+                                <a href="{% url 'modifierCommentaire' commentaire.pk %}"><i class="bi bi-pencil"></i></a>
+                                <a href="{% url 'supprimerCommentaire' commentaire.pk %}"><i class="bi bi-trash"></i></a>
+                            {% elif user.is_superuser %}
+                                <a href="{% url 'supprimerCommentaire' commentaire.pk %}"><i class="bi bi-trash"></i></a>
+                            {% endif %}
+                        </p>
+                        <p>{{ commentaire.commentaire }} </p>
+                        <p><small>Note: {{ commentaire.note }} <i class="bi bi-star-fill text-warning"></i></small></p>
+                    </div>
+                    {% empty %}
+                    <p>Aucun commentaire pour le moment.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

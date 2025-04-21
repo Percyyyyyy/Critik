@@ -1,0 +1,45 @@
+{% extends 'maitre.html' %}
+{% load static %}
+{% block titre %}Critik - Accueil{% endblock %}
+
+{% block titrepage %}
+<h2>Accueil</h2>
+{% endblock %}
+
+{% block accueil %}
+<style>
+    .custom-card {
+        width: 70%;
+        height: 20%;
+    }
+</style>
+
+<!-- Présentation du site -->
+<div class="container my-4">
+    <div class="card p-4 bg-white border-0 shadow-sm custom-card">
+        <h3 class="mb-3">Bienvenue sur notre site de critiques de restaurants 🍽️</h3>
+        <p>
+            Découvrez, partagez et explorez des avis sur vos restaurants préférés !<br>
+            Notre plateforme vous permet de donner votre avis sur un restaurant dans sa globalité : ambiance, service, qualité des plats, et bien plus encore. 
+            Aidez la communauté à faire les meilleurs choix grâce à vos retours d’expérience.
+        </p>
+        
+        <h5 class="mt-4">👤 Mode utilisateur</h5>
+        <ul>
+            <li>Évaluer un restaurant dans son ensemble (ambiance, service, cuisine, etc.)</li>
+            <li>Lire les avis des autres utilisateurs</li>
+            <li>Partager votre expérience pour guider les futurs visiteurs</li>
+        </ul>
+        
+        <h5 class="mt-4">👨‍💼 Mode administrateur</h5>
+        <ul>
+            <li>Suivi des nouveaux avis</li>
+            <li>Historique des modifications sur les évaluations</li>
+            <li>Suivi global de l’activité via un système de logs intégré</li>
+        </ul>
+        
+        
+    </div>
+</div>
+
+{% endblock %}

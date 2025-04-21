@@ -1,0 +1,14 @@
+{% extends 'maitre.html' %}
+{% block titre %}Critik - Connexion{% endblock %}
+
+{% block login %} 
+    <h4>Se connecter</h4>
+    <form method="post">       
+        <table>
+            {% csrf_token %}
+            {{ form.as_table }}
+        </table>    
+        <button type="submit">Login</button>   
+    </form>
+    <a href="{% url 'enregistrement' %}">Nouvel utilisateur</a>
+{% endblock %}

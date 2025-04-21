@@ -1,0 +1,74 @@
+{% extends 'maitre.html' %}
+{% load static %}
+
+{% block titre %}Cinéma - Films{% endblock %}
+
+{% block titrepage %}
+<h2>Administration</h2>
+{% endblock %}
+
+{% block admin %}
+<ul class="list-group">
+    {% for log in logs %}
+    <li class="list-group-item
+        {% if 'ajouté' in log.action %}
+            list-group-item-success
+        {% elif 'Modification' in log.action %}
+            list-group-item-warning
+        {% elif 'supprimé' in log.action %}
+            list-group-item-danger
+        {% endif %}">
+        
+        <a href="#logModal{{ log.id }}" data-bs-toggle="modal" style="color: black;" class="d-flex justify-content-start align-items-center text-decoration-none">
+            {% if 'ajouté' in log.action %}
+                <i class="bi bi-plus-circle-fill text-success"></i>
+            {% elif 'Modification' in log.action %}
+                <i class="bi bi-pencil-square text-warning"></i>
+            {% elif 'supprimé' in log.action %}
+                <i class="bi bi-trash-fill text-danger"></i>
+            {% endif %}
+            
+            <span class="ms-2">{{ log.action }}</span>
+            <span class="text-muted ms-auto">{{ log.timestamp|date:"d M Y H:i" }}</span>
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+
+
+<!-- Modal pour afficher les détails du log -->
+{% for log in logs %}
+<div class="modal fade" id="logModal{{ log.id }}" tabindex="-1" aria-labelledby="logModalLabel{{ log.id }}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        
+            <div class="modal-header">
+                <h5 class="modal-title" id="logModalLabel{{ log.id }}">Détails du log</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <div class="modal-body">
+                <p><strong>Nom de l'utilisateur:</strong> {{ log.user.username }}</p>
+                <p><strong>Action:</strong> {{ log.action }}</p>
+                <p><strong>Date:</strong> {{ log.timestamp|date:"d M Y H:i" }}</p>
+
+                {% if log.changes %}
+                <p><strong>Modifications:</strong></p>
+                <ul>
+                    {% for change in log.changes %}
+                    <li>{{ change }}</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p><em>Aucune modification détectée.</em></p>
+                {% endif %}
+            </div>
+            
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'maitre.html' %}
+
+{% block titre %}Critik - Modification d'un commentaire{% endblock %}
+
+{% block formulaireAjout %} 
+    <h4>Modification du commentaire choisi</h4>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Modifier</button>
+    </form>
+
+
+{% endblock %}

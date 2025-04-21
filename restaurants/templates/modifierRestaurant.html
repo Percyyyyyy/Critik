@@ -1,0 +1,29 @@
+{% extends 'maitre.html' %}
+{% load widget_tweaks %}
+
+{% block titre %}Critik - Modification d'un restaurant{% endblock %}
+
+{% block formulaireAjout %} 
+<h4 class="mb-4">Modification du restaurant choisi</h4>
+<form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="id_nomRestaurant" class="form-label">Nom du restaurant</label>
+        {{ form.nomRestaurant|add_class:"form-control" }}
+    </div>
+    <div class="mb-3">
+        <label for="id_villeRestaurant" class="form-label">Ville</label>
+        {{ form.villeRestaurant|add_class:"form-control" }}
+    </div>
+    <div class="mb-3">
+        <label for="id_adresseRestaurant" class="form-label">Adresse</label>
+        {{ form.adresseRestaurant|add_class:"form-control" }}
+    </div>
+    <div class="mb-3">
+        <label for="id_typeRestaurant" class="form-label">Type</label>
+        {{ form.typeRestaurant|add_class:"form-select" }}
+    </div>
+    <button type="submit" class="btn btn-primary">Modifier</button>
+</form>
+{% endblock %}
+

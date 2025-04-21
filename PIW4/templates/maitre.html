@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <title>{% block titre %} {% endblock %}</title>
+</head>
+
+<body>
+    <header>
+        <h1>{% include "header.html" %}</h1>
+        <nav>
+            {% include "menu.html" %}
+        </nav>
+    </header>
+    <main>
+      {% block titrepage %} {% endblock %}
+        {% block accueil %} 
+        {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endblock %}
+        {% block apropos %} {% endblock %}
+        {% block restaurants %} {% endblock%}
+        {% block modification1 %} {% endblock%}
+        {% block detailRestaurant %} {% endblock %}
+        {% block formulaireAjout %} {% endblock %}
+        {% block ConfirmationFormulaire %} {% endblock %}
+        {% block confirmationBillet %} {% endblock %}
+        {% block enregistrement %}{% endblock %}
+        {% block login %} {% endblock %}
+        {% block admin %} {% endblock %}
+        {% block logout %} {% endblock %}
+        {% block representation %} {% endblock %}
+        {% block detailRepresentation %} {% endblock %}
+        {% block historique %} {% endblock %}
+
+    </main>
+    
+    <footer>
+        {% include "footer.html" %}
+    </footer>
+</body>
+
+</html>

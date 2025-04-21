@@ -1,0 +1,14 @@
+{% extends 'maitre.html' %}
+{% load static %}
+{% block titre %}Critik - Commentaires{% endblock %}
+
+{% block titrepage %}
+<h2>Listes des commentaires données aux restaurants</h2>
+{% endblock %}
+{% block historique %}
+{% for c in commentaires %}
+<div>
+  <p><strong>{{ c.note }}<i class="bi bi-star-fill text-warning"></i></strong> pour le restaurant <strong>'{{ c.noRestaurant.nomRestaurant }}'</strong> situé à le '{{ c.noRestaurant.adresseRestaurant }}' <strong> le {{ c.dateCommentaire|date:"d F Y" }}</strong>: "{{ c.commentaire }}"</p> 
+  </div>
+{% endfor %}
+{% endblock%}

@@ -1,0 +1,225 @@
+body {
+    background: linear-gradient(to right, #fffaf0, #fdf5e6);
+    color: #333333; 
+    font-family: 'Arial', sans-serif; 
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header, footer {
+    background: linear-gradient(to right, #fffaf0, #fdf5e6);
+    color: white;
+}
+
+header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 60px;
+    text-align: center;
+    font-weight: 700;
+    color: #8b0000; 
+    letter-spacing: 2px;
+    padding: 15px 0;
+    border-bottom: 2px solid #d2b48c;
+}
+
+nav {
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    padding-left: 80px;
+    padding-right: 80px;
+    background-color:#8b0000;
+}
+nav.navbar {
+    background: linear-gradient(to right, #fffaf0, #fdf5e6);
+}
+
+.menu-link {
+    background-color: #8b0000 !important;
+    color: white !important;
+    border-radius: 5px; 
+    margin-right: 10px; 
+    padding: 5px 10px;
+}
+
+
+a {
+    color: #d2691e;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #8b0000;
+    text-decoration: underline;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    flex: 0.7;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    border-radius: 10px;
+}
+
+h2, h3 {
+    font-family: 'Playfair Display', serif;
+    color: #8b0000;
+}
+
+.card {
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+footer {
+    display: flex;
+    flex: 0.10;
+    justify-content: center;
+    text-align: center;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: black;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #fffaf0;
+}
+.table {
+    background-color: #fffaf0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.table th {
+    background-color: #8b0000;
+    color: white;
+    vertical-align: middle;
+}
+
+.table td {
+    background-color: #fffaf0;
+    color: #333;
+    vertical-align: middle;
+}
+
+.table td i.bi-eye {
+    color: #8b0000;
+    font-size: 1.2em;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+    background-color: #fdf5e6;
+}
+
+.table-striped > tbody > tr:hover > * {
+    background-color: #faebd7;
+    transition: background-color 0.2s ease;
+}
+
+
+.card {
+    background-color: white;
+    border: 1px solid #d2b48c;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.card-header {
+    background-color: #fffaf0;
+    border-bottom: 1px solid #d2b48c;
+    color: #8b0000;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.btn-primary {
+    background-color: #8b0000;
+    border-color: #8b0000;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #a52a2a;
+    border-color: #a52a2a;
+}
+
+.btn-danger {
+    background-color: #b22222;
+    border-color: #b22222;
+}
+
+.btn-danger:hover {
+    background-color: #dc143c;
+    border-color: #dc143c;
+}
+
+.modal-content {
+    border-radius: 12px;
+    border: 1px solid #d2b48c;
+    background: #fffaf0;
+}
+
+.modal-header {
+    background: #fdf5e6;
+    border-bottom: 1px solid #d2b48c;
+    color: #8b0000;
+}
+
+textarea.form-control,
+input.form-control,
+select.form-control {
+    border-radius: 8px;
+    border: 1px solid #d2b48c;
+}
+
+.card-title {
+    font-family: 'Playfair Display', serif;
+    color: #8b0000;
+}
+
+.comment-bloc {
+    background: #f9f9f9;
+    border-left: 4px solid #d2b48c;
+    border-radius: 8px;
+}
+
+.comment-bloc.user-own {
+    background-color: #fef3e2;
+    border-color: #8b0000;
+}
+.btn-icon {
+    background-color: #fff;
+    color: #8b0000;
+    border: 1px solid #8b0000;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+}
+
+.btn-icon:hover {
+    background-color: #8b0000;
+    color: white;
+}
+
+.custom-comment-highlight {
+    background: linear-gradient(to right, #fffaf0, #fdf5e6);
+    border-color: #aad8f1;
+    border-radius: 5px;
+}

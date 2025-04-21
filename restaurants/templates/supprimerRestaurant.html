@@ -1,0 +1,16 @@
+{% extends 'maitre.html' %}
+{% block titre %}Cinéma - Suppression de la réservation{% endblock %}
+
+{% block titrepage %}
+    <p>Supprimer une réservation</p>
+{% endblock %}
+
+
+{% block ConfirmationFormulaire %}
+  <form method="POST">
+    {% csrf_token %}
+    <p>Voulez-vous supprimer le restaurant {{ leRestaurant.nomRestaurant }} ? </p>
+    <p style="text-align: center;"><input type="submit" value="Oui"></p>
+  </form>
+  <p style="text-align: center;"><a href="{% url 'accueilRestaurant' %}">Annuler et retour à la page des restaurants</a></p>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'maitre.html' %}
+{% block titre %}Critik - Enregistrement{% endblock %}
+
+{% block enregistrement %} 
+    <h4>Enregistrement d'un utilisateur</h4>
+    <form method="post">       
+        {% csrf_token %}
+        <table>
+            {% for field in form %}
+            <tr>
+                <td>{{ field.label_tag }}</td>
+                <td>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="text-danger">{{ field.errors }}</div>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>    
+        <input type="submit" value="Enregistrer">    
+    </form>
+    
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'maitre.html' %}
+{% block titre %}Critik - Suppression du commentaire{% endblock %}
+
+{% block titrepage %}
+    <p>Supprimer un commentaire</p>
+{% endblock %}
+
+
+{% block ConfirmationFormulaire %}
+  <form method="POST">
+    {% csrf_token %}
+    <p>Voulez-vous supprimer le commentaire "{{ leCommentaire.commentaire }}" avec la note de "{{leCommentaire.note }} étoiles" ? </p>
+    <p style="text-align: center;"><input type="submit" value="Oui"></p>
+  </form>
+  <p style="text-align: center;"><a href="{% url 'accueilRestaurant' %}">Annuler et retour à la page des restaurants</a></p>
+{% endblock %}

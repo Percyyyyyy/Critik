@@ -1,0 +1,115 @@
+{% extends 'maitre.html' %}
+{% load static %}
+
+{% block titre %}Critik - Restaurants{% endblock %}
+
+{% block titrepage %}
+<h2>Liste des restaurants</h2>
+{% endblock %}
+
+{% block restaurants %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row align-items-center">
+                <div class="col-md-10">
+                    <form class="row g-3" method="GET">
+                        <div class="col-md-4">
+                            <select class="form-select" name="typeRestaurant" id="typeRestaurant">
+                                <option value="">Tous les types</option>
+                                {% for type in typeRestaurants %}
+                                <option value="{{ type.nomType }}" {% if type.nomType == typeSaisi %}selected{% endif %}>{{ type.nomType }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" placeholder="Ville..." type="text" name="villeRestaurant" id="villeRestaurant" value="{{ villeSaisie }}">
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn" style="background-color: #d2b48c; color: #fff;">Filtrer</button>
+                        </div>
+                    </form>
+                </div>
+
+                {% if user.is_authenticated %}
+                <div class="col-md-2 text-end">
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ajouterRestaurantModal">
+                        <i class="bi bi-plus"></i> Ajouter un restaurant
+                    </button>
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Modal pour ajouter un restaurant -->
+            <div class="modal fade" id="ajouterRestaurantModal" tabindex="-1" aria-labelledby="ajouterRestaurantModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="ajouterRestaurantModalLabel">Ajouter un restaurant</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="ajouterRestaurantForm" method="POST" action="{% url 'ajouterRestaurant' %}">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="nomRestaurant">Nom du restaurant:</label>
+                                    <input type="text" class="form-control" id="nomRestaurant" name="nomRestaurant" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="villeRestaurant">Ville:</label>
+                                    <input type="text" class="form-control" id="villeRestaurant" name="villeRestaurant" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="adresseRestaurant">Adresse:</label>
+                                    <input type="text" class="form-control" id="adresseRestaurant" name="adresseRestaurant" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="typeRestaurant">Type:</label>
+                                    <select class="form-control" id="typeRestaurant" name="typeRestaurant" required>
+                                        {% for type in typeRestaurants %}
+                                            <option value="{{ type.pk }}">{{ type.nomType }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Ajouter</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Table des restaurants -->
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>
+                            Note
+                            <a href="?triNote=asc"><i class="bi bi-arrow-up"></i></a>
+                            <a href="?triNote=desc"><i class="bi bi-arrow-down"></i></a>
+                        </th>
+                        <th>Nom du Restaurant</th>
+                        <th>Ville</th>
+                        <th>Type</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for restaurant in lstRestaurants %}
+                    <tr>
+                        <td>{{ restaurant.noteRestaurant }} <i class="bi bi-star-fill text-warning"></i></td>
+                        <td>{{ restaurant.nomRestaurant }}</td>
+                        <td>{{ restaurant.villeRestaurant }}</td>
+                        <td>{{ restaurant.typeRestaurant.nomType }}</td>
+                        <td><a href="{% url 'detailRestaurant' restaurant.pk %}"><i class="bi bi-eye"></i></a></td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4">Aucun restaurant trouvé.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
